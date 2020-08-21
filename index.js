@@ -28,6 +28,19 @@ app.post("/item", (req, res) => {
   res.json(message);
 });
 
+app.put("/item/:id", (req, res) => {
+  if (!items[req.params.id - 1]) {
+    return res.status(404).json({ error: "Unknown item" });
+  }
+  if (req.body.description) {
+    items[req.params.id - 1].description = req.body.description;
+  }
+  if (req.body.completed) {
+    items[req.params.id - 1].completed = !!req.body.completed;
+  }
+  res.json(items[req.params.id - 1]);
+});
+
 app.get("/items", (req, res) => {
   res.json(items);
 });
