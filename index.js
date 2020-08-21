@@ -35,7 +35,7 @@ app.put("/item/:id", (req, res) => {
   if (req.body.description) {
     items[req.params.id - 1].description = req.body.description;
   }
-  if (req.body.completed) {
+  if ("completed" in req.body) {
     items[req.params.id - 1].completed = !!req.body.completed;
   }
   res.json(items[req.params.id - 1]);
